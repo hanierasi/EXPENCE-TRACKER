@@ -1,2 +1,56 @@
-.idea
-.venv
+
+
+.idea/
+
+Python virtual environments
+
+.venv/
+venv/
+env/
+ENV/
+
+Python bytecode and cache
+
+pycache/
+*.py[codz]
+*$py.class
+
+Environment variables and secrets
+
+.env
+.envrc
+
+Python packaging
+
+build/
+dist/
+*.egg-info/
+
+Testing and coverage
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+Type checking and linting
+
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+
+Jupyter
+
+.ipynb_checkpoints/
+
+OS files
+
+.DS_Store
+Thumbs.db
+
+Temporary files
+
+tempCodeRunnerFile.py
