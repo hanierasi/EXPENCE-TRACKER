@@ -1,6 +1,5 @@
 expenses = []
 
-
 def add_expense():
     # Get a valid expense count
     while True:
@@ -43,15 +42,16 @@ def add_expense():
         save_expenses()
         print("Expense added successfully")
 
-    print(expenses)
+    show_all_expenses()
 
+#---------------------------------------------------------------------------------------
 
 def save_expenses():
     with open("expenses.txt", "w") as file:
         for expense in expenses:
             file.write(f"{expense["id"]},{expense['name']},{expense['amount']}\n")
 
-
+#---------------------------------------------------------------------------------------
 def load_expenses():
     expenses.clear()
     try:
@@ -81,20 +81,10 @@ def load_expenses():
     except FileNotFoundError:
         print("expenses.txt file not found")
 
-
+#---------------------------------------------------------------------------------------
 def edit_expense():
-    while True:
         #select an expense
-        try:
-            edited_expense_id = int(input("Please enter the expense id:"))
-        except ValueError:
-            print("Please enter the ID :")
-            continue
-
-        expense = next((item for item in expenses if item["id"] == edited_expense_id), None)
-        if expense is None:
-            print("Expense ID not found . please enter the ID")
-            continue
+        expense = select_expense()
         #show the selected expense
         show_expense(expense)
         #Allow repeated edits
@@ -108,7 +98,7 @@ def edit_expense():
             if choice == "1":
                 while True:
                     new_name = input("Please enter the new expense name:").strip().title()
-                    if new_name.isalpha():
+                    if new_name and all (char.isalpha() or char.isspace() for char in new_name):
                         expense["name"] = new_name.title()
                         save_expenses()
                         show_expense(expense)
@@ -136,16 +126,59 @@ def edit_expense():
             else:
                 print("Please enter the choice 1,2,3 or 4")
 
-
+#---------------------------------------------------------------------------------------
 def show_expense(expense):
     print("\n---CURRENT EXPENSE---")
     print(f"ID :{expense['id']}\n"
           f"Name :{expense['name']}\n"
           f"Amount :{expense['amount']}\n")
-
+#---------------------------------------------------------------------------------------
 def show_all_expenses():
     if not expenses:
         print("No expenses found")
         return
     for expense in expenses:
         show_expense(expense)
+#---------------------------------------------------------------------------------------
+def delete_expense():
+    # select an expense
+    expense = select_expense()
+    # show the selected expense
+    show_expense(expense)
+    # Allow repeated delete
+    while True:
+        chooice_delete = input("do you want to delete the expense ?\n"
+                               "1-Yes\n"
+                               "2-No(Exit)\n").strip()
+        if chooice_delete == "1":
+            expenses.remove(expense)
+            reassign_expense_id()
+            save_expenses()
+            print("Expense deleted successfully")
+            show_all_expenses()
+        elif chooice_delete == "2":
+            print("deletion cancelled")
+            return
+        else:
+            print("Please enter the choice 1 or 2")
+            continue
+
+#---------------------------------------------------------------------------------------
+def select_expense():
+#select an expense
+ while True:
+    try:
+        expense_id = int(input("Please enter the expense ID:"))
+    except ValueError:
+        print("Please enter the ID :")
+        continue
+
+    expense = next((item for item in expenses if item["id"] == expense_id), None)
+    if expense is not  None:
+        return  expense
+    print("Expense ID not found . please enter the ID")
+
+#---------------------------------------------------------------------------------------
+def reassign_expense_id():
+    for index, expense in enumerate(expenses, start=1):
+        expense ["id"] = index
