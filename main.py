@@ -23,7 +23,7 @@ while True:
             elif chose_option == "4":
                 expense_manager.delete_expense()
             elif chose_option == "5":
-                pass
+                expense_manager.total_expense()
             elif chose_option == "6":
                 pass
             elif chose_option == "7":
