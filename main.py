@@ -2,34 +2,33 @@ import function as expense_manager
 expense_manager.load_expenses()
 
 while True:
-    chose_option = input("please choose an option(just write the number): \n"
-                         "1-Add Expense "
-                         "2-Show Expense "
-                         "3-Edit Expense "
-                         "4-Delete Expense "
-                         "5-Show total Expense "
-                         "6-Show most Expense "
+    choise_option = input("please choose an option(just write the number):\n"
+                         "1-Add Expense\n"
+                         "2-Show Expense\n"
+                         "3-Edit Expense\n"
+                         "4-Delete Expense\n"
+                         "5-Show Total Expense\n"
+                         "6-Show Highest And Lowest Expense\n"
                          "7-Exit\n")
-    if chose_option.isdigit():
+    if choise_option.isdigit():
 
-        if 1 <= int(chose_option) <= 7:
+        if 1 <= int(choise_option) <= 7:
 
-            if chose_option == "1":
+            if choise_option == "1":
                 expense_manager.add_expense()
-            elif chose_option == "2":
+            elif choise_option == "2":
                 expense_manager.show_all_expenses()
-            elif chose_option == "3":
+            elif choise_option == "3":
                 expense_manager.edit_expense()
-            elif chose_option == "4":
+            elif choise_option == "4":
                 expense_manager.delete_expense()
-            elif chose_option == "5":
+            elif choise_option == "5":
                 expense_manager.total_expense()
-            elif chose_option == "6":
-                pass
-            elif chose_option == "7":
-                pass
-            else:
-                pass
+            elif choise_option == "6":
+                expense_manager.show_highest_and_lowest_expensive()
+            elif choise_option == "7":
+                print("Thank you for using this program\nGoodbye!")
+                break
         else:
             print("number must be between 1 and 7")
 

@@ -1,3 +1,2 @@
-1,Ruler,55.0
-2,Glass,5.6
-3,Book English,200.0
+1,Guitar Class,20000.0
+2,Books,80000.0
